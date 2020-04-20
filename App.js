@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-import {View, StyleSheet, FlatList, Alert} from 'react-native';
+import {View, StyleSheet, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoitem';
 import AddTodo from './components/addTodo';
@@ -16,7 +16,7 @@ const App: () => React$Node = () => {
     console.log(key);
     setTodos(prevTodos => {
       console.log(prevTodos);
-      //finally return ex: click 1, when return without 1, like using filter it filtering wiht condition
+      //finally return ex: click 1, when return without 1, like using filter it filtering with condition
       return prevTodos.filter(todo => todo.key != key);
     });
   };
@@ -35,6 +35,10 @@ const App: () => React$Node = () => {
 
   return (
     <>
+     <TouchableWithoutFeedback onPress={() => {
+       Keyboard.dismiss();
+       console.log('dismissed keyboard');
+     }}>
       <View style={styles.container}>
         <Header />
         <View style={styles.content}>
@@ -49,6 +53,7 @@ const App: () => React$Node = () => {
           </View>
         </View>
       </View>
+     </TouchableWithoutFeedback>
     </>
   );
 };
